@@ -16,16 +16,16 @@ class UserMailer < ApplicationMailer
       openssl_verify_mode: 'none'
     }
     
-    IO.binwrite(Rails.root.join("public/Cabezal.jpg"), File.read(Rails.root.join("app/assets/images/Cabezal.jpg")))
-    IO.binwrite(Rails.root.join("public/Pie.jpg"), File.read(Rails.root.join("app/assets/images/Pie.jpg")))
+    @header_file = cabezal_#{mensaje.id}_#{mensaje.header}
+    @footer_file = cabezal_#{mensaje.id}_#{mensaje.footer}
+	@body = mensaje.body
 
-    #MensajeAdjunto.where("mensaje_id=?",mensaje.id).each do |adjunto|
-    #  attachments[adjunto.nombre] = adjunto.datos #File.read(file_path)
-    #end
-    #@body = mensaje.body
-    #attachments["archivo.jpg"] = File.read("#{Rails.root.to_s}/app/assets/images/Cabezal.jpg")
-    #attachments.inline["Cabezal.jpg"] = File.read("#{Rails.root.to_s}/app/assets/images/Cabezal.jpg")
-    #@attachments = attachments
+    IO.binwrite(Rails.root.join("public/#{@header_file}"), mensaje.header_data)
+    IO.binwrite(Rails.root.join("public/#{@footer_file}"), mensaje.footer_data)
+
+    MensajeAdjunto.where("mensaje_id=?",mensaje.id).each do |adjunto|
+      attachments[adjunto.nombre] = adjunto.datos
+    end
 
     mail( 
       from: mensaje.from, 
