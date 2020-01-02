@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def mensaje_image_tag(image, **options)
+  def mensaje_image_tag(image)
 	attachments.inline[image] = File.read(Rails.root.join("public/#{image}"))
-    image_tag attachments[image].url, **options
+    image_tag attachments[image].url, style: 'width:700px;height:auto;'
   end
 end
