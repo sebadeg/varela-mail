@@ -16,8 +16,8 @@ class UserMailer < ApplicationMailer
       openssl_verify_mode: 'none'
     }
     
-    @header_file = cabezal_#{mensaje.id}_#{mensaje.header}
-    @footer_file = cabezal_#{mensaje.id}_#{mensaje.footer}
+    @header_file = "cabezal_#{mensaje.id}_#{mensaje.header}"
+    @footer_file = "cabezal_#{mensaje.id}_#{mensaje.footer}"
 	@body = mensaje.body
 
     IO.binwrite(Rails.root.join("public/#{@header_file}"), mensaje.header_data)
