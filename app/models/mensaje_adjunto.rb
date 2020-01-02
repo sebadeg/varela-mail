@@ -1,0 +1,2 @@
+class MensajeAdjunto < ApplicationRecord
+end
