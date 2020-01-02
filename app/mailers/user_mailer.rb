@@ -16,12 +16,7 @@ class UserMailer < ApplicationMailer
       openssl_verify_mode: 'none'
     }
     
-    @header_file = "cabezal_#{mensaje.id}_#{mensaje.header}"
-    @footer_file = "cabezal_#{mensaje.id}_#{mensaje.footer}"
 	@body = mensaje.body
-
-    IO.binwrite(Rails.root.join("public/#{@header_file}"), mensaje.header_data)
-    IO.binwrite(Rails.root.join("public/#{@footer_file}"), mensaje.footer_data)
 
     MensajeAdjunto.where("mensaje_id=?",mensaje.id).each do |adjunto|
       attachments[adjunto.nombre] = adjunto.datos
