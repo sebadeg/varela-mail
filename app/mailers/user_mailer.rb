@@ -19,6 +19,9 @@ class UserMailer < ApplicationMailer
     data = File.read(Rails.root.join("app/assets/images/Cabezal.jpg"))
     IO.binwrite(Rails.root.join("public/Cabezal.jpg"), data)
 
+    data = File.read(Rails.root.join("app/assets/images/Pie.jpg"))
+    IO.binwrite(Rails.root.join("public/Pie.jpg"), data)
+
     #MensajeAdjunto.where("mensaje_id=?",mensaje.id).each do |adjunto|
     #  attachments[adjunto.nombre] = adjunto.datos #File.read(file_path)
     #end
